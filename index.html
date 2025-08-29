@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>NeuMusic</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="icon" href="icon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Style Sheets -->
+  <link rel="stylesheet" type="text/css" href="source/css/main.css">
+  <link rel="stylesheet" type="text/css" href="source/css/login.css">
+  <link rel="stylesheet" type="text/css" href="source/css/nav.css">
+  <link rel="stylesheet" type="text/css" href="source/css/list.css">
+  <link rel="stylesheet" type="text/css" href="source/css/me.css">
+  <link rel="stylesheet" type="text/css" href="source/css/bar.css">
+  <link rel="stylesheet" type="text/css" href="source/css/search.css">
+  <link rel="stylesheet" type="text/css" href="source/css/playing.css">
+
+  <!-- Fonts -->
+  <link href='https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.1/css/all.css' rel='stylesheet' type='text/css'>
+
+  <!-- Md5 -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.18.0/js/md5.js"></script>
+
+  <!-- JQuery -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+</head>
+
+<body>
+  <!-- 播放歌曲 -->
+  <audio class="playing" id="audio"></audio>
+
+  <!-- 顶部导航栏 -->
+  <nav class='nav'>
+
+    <div class='nav_btns'>
+      <div class='btn_arrow'><i class='fas fa-arrow-left' onclick="javascript:window.history.back()"></i></div>
+      <div class='btn_arrow'><i class='fas fa-arrow-right' onclick="javascript:window.history.back()"></i></div>
+    </div>
+
+    <div class='nav_links'>
+      <a>首页</a> 
+	  <a>发现</a> 
+	  <a onclick="showPlaying()">正在播放</a>
+    </div>
+
+    <div class="nav_box">
+      <div class="search_box">
+        <a class="search_btn"><i class="fas fa-search"></i></a>
+        <input class="search_input" placeholder="搜索">
+      </div>
+
+      <div class="nav_avatar" id="avatar">
+        <i class="fas fa-user-alt" id="avatar_i"></i>
+      </div>
+
+      <i class="fas fa-sign-out-alt" id="sign_out" onclick="logout()"></i>
+
+    </div>
+
+  </nav>
+
+  <!-- 主体 -->
+  <div class="contianer">
+<!-- 首页 -->
+<div class="home">
+
+  
+  <div class="recommendations">
+    <h2 class="section-title">推荐歌单</h2>
+    <div class="playlist-grid" id="recommend-playlists"></div>
+	
+    <h2 class="section-title">热门歌手</h2>
+    <div class="artist-grid" id="top-artists"></div>
+	
+    <h2 class="section-title">新歌速递</h2>
+    <div class="song-list" id="new-songs"></div>
+    
+  </div>
+</div>
+
+<!-- 发现页面 -->
+<div class="discover">
+  <div class="discover-header">
+    <h1>发现音乐</h1>
+    <div class="discover-tabs">
+      <span class="discover-tab active" data-tab="recommend">个性推荐</span>
+      <span class="discover-tab" data-tab="playlist">歌单</span>
+      <span class="discover-tab" data-tab="rank">排行榜</span>
+      <span class="discover-tab" data-tab="artist">歌手</span>
+    </div>
+  </div>
+  
+  <div class="discover-content">
+    <div class="discover-section active" id="recommend-section">
+      <!-- 内容将通过JS动态加载 -->
+    </div>
+    
+    <div class="discover-section" id="playlist-section">
+      <!-- 内容将通过JS动态加载 -->
+    </div>
+    
+    <div class="discover-section" id="rank-section">
+      <!-- 内容将通过JS动态加载 -->
+    </div>
+    
+    <div class="discover-section" id="artist-section">
+      <!-- 内容将通过JS动态加载 -->
+    </div>
+  </div>
+</div>
+    <!-- 登录box -->
+    <div class="login">
+      <div class="login_box">
+        <i class="fas fa-envelope"></i>
+        <i class="fas fa-mobile-alt"></i>
+        <input id="account_input" placeholder="请输入网易云音乐账号">
+      </div>
+
+      <div class="login_box">
+        <i class="fas fa-lock"></i>
+        <input id="pwd_input" type="password" placeholder="请输入网易云音乐密码">
+      </div>
+
+      <div class="login_qrcode_box">
+        <img id="pic" class="login_qrcode"></img>
+      </div>
+
+      <div class="login_btn_box">
+        <div class="login_btn" id="login"><i class="fas fa-check"></i></div>
+        <div class="login_btn" id="login_with_qrcode"><i class="fas fa-qrcode" id="login_btn_icon"></i></i></div>
+      </div>
+
+      <div class="change_login"><a id="loginMethodChanger">使用手机号登录</a></div>
+    </div>
+
+    <!-- 主页 -->
+    <div class="me">
+      <div class="me_info">
+        <div class="me_avatar" id="avatar"></div>
+        <div class="me_greeting">
+          <span class="good">Good Morning</span></br>
+          <div class="user_id_div">
+            <span class="user_id">USERNAME</span></br></br>
+          </div>
+          <span class="hitokoto"></span>
+        </div>
+      </div>
+      <div class="my_play_lists">
+        <div class="creat_lists">
+          <div class="list_cover" id="creat_list_cover"></div>
+          <span class="list_name">我创建的歌单</span>
+        </div>
+
+        <div class="fav_lists">
+          <div class="list_cover" id="fav_list_cover"></div>
+          <span class="list_name">我收藏的歌单</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="playing_div">
+      <div class="playing_info_div">
+        <div class="playing_cover" id="pic"></div>
+        <div class="playing_info">
+          <div class="playing_SA">
+            <span class="playing_singer"></span>-<span class="playing_album"></span></br>
+          </div>
+          <span class="playing_name"></span>
+          <div class="playing_album_div">
+            <div class="playing_album_cover" href="album"></div>
+            <span class="playing_album" id="under_cover"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="playing_bar">
+        <div class="playing_progress">
+          <div class="playing_totalProgress">
+            <div class="playing_currentProgress"></div>
+          </div>
+        </div>
+        <div class="bar_process" id="playing_bar_process">
+          <div class="bar_loop_svg" onclick="changeLoopMethod()">
+            <embed src="source/img/loop.svg" type="image/svg+xml"
+              pluginspage="http://www.adobe.com/svg/viewer/install/" />
+          </div>
+          <i class="fas fa-backward" id="playing_bar_backward" onclick="changeSong(0)"></i>
+          <i class="fas fa-play" id="playing_bar_play" onclick="startToPlay()"></i>
+          <i class="fas fa-pause" id="playing_bar_pause" style="display:none" onclick="pausePlaying()"></i>
+          <i class="fas fa-forward" id="playing_bar_forward" onclick="changeSong(1)"></i>
+          <i class="fas fa-heart" id="playing_bar_heart"></i>
+          <i class="fas fa-download" id="playing_bar_download" onclick="downloadCurrentSong()" title="下载当前歌曲"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- 搜索结果列表 -->
+    <div class="list" id="search_list">
+      <div class="ser_pro_bar">
+        <span class="fas fa-arrow-left" id="arrow" href="backward"></span>
+        <span class="change_search_method" id="csm1" href="1"
+          style="box-shadow: inset 0.2vh 0.2vh 1vh #cdcdcd, inset -0.3vh -0.3vh 0.6vh #ffffff"
+          onclick="changeSearchMethod(1)">单曲</span>
+        <span class="change_search_method" id="csm1000" href="1000" onclick="changeSearchMethod(1000)">歌单</span>
+        <span class="change_search_method" id="csm10" href="10" onclick="changeSearchMethod(10)">专辑</span>
+        <span class="fas fa-arrow-right" id="arrow" href="forward"></span>
+      </div>
+
+
+    </div>
+
+    <!-- 列表 -->
+    <div class="list" id="item_list">
+      <div class="list_info">播放列表</div>
+    </div>
+  </div>
+
+  <!-- 底部栏 -->
+  <div class="bar">
+    <div class="totalProgress">
+      <div class="currentProgress"></div>
+    </div>
+    <div class="bar_cover_img"></div>
+    <div class="bar_song_info" onclick="showPlaying()">
+      <span class="item_name" id="bar_song_name" onclick="showPlaying()"></span>
+      <br>
+      <div class="song_SA">
+        <a class="singer" id="bar_singer"></a> - <a class="album" id="bar_album"></a>
+      </div>
+    </div>
+    <div class="bar_process">
+      <div class="bar_loop_svg" onclick="changeLoopMethod()">
+        <embed src="source/img/loop.svg" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" />
+      </div>
+      <i class="fas fa-backward" id="bar_backward" onclick="changeSong(0)"></i>
+      <i class="fas fa-play" id="bar_play" onclick="startToPlay()"></i>
+      <i class="fas fa-pause" id="bar_pause" style="display:none" onclick="pausePlaying()"></i>
+      <i class="fas fa-forward" id="bar_forward" onclick="changeSong(1)"></i>
+      <i class="fas fa-heart" id="bar_heart"></i>
+      <i class="fas fa-download" id="bar_download" onclick="downloadCurrentSong()" title="下载当前歌曲"></i>
+    </div>
+  </div>
+  
+
+  
+  
+<!-- 歌手歌曲弹窗 -->
+<div class="modal-overlay" id="artist-modal">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h2 id="modal-artist-name"></h2>
+      <button class="modal-close">&times;</button>
+    </div>
+    <div class="modal-content">
+      <div class="modal-cover">
+        <img id="modal-artist-cover" src="">
+      </div>
+      <div class="modal-song-list" id="modal-artist-songs"></div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<!-- Scripts -->
+<script src="source/js/tooles.js"></script>
+<script src="source/js/play.js"></script>
+<script src="source/js/login.js"></script>
+<script src="source/js/bar.js"></script>
+<script src="source/js/me.js"></script>
+<script src="source/js/list.js"></script>
+<script src="source/js/main.js"></script>
+<script src="source/js/search.js"></script>
+<script src="source/js/playing.js"></script>
+
+</html>

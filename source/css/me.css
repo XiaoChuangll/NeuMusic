@@ -1,0 +1,187 @@
+.me{
+    width: 40vw;
+    border-radius: 10%;
+}
+
+.me_info{
+    width: 100%;
+    height: 15vw;
+    position: relative;
+}
+
+.me_avatar{
+    width: 15vw;
+    height: 15vw;
+    border-radius: 10%;
+    box-shadow: 1vh 1vh 2vh #cdcdcd,
+    -0.9vh -0.9vh 2vh #ffffff;
+    float: left;
+    position: absolute;
+}
+
+.me_greeting{
+    width: 22vw;
+    height: 15vw;
+    position: absolute;
+    left: 17vw;
+}
+
+.good{
+    font-size: 3vw;
+    color: #00000070;
+}
+
+.user_id{
+    font-size: 4vw;
+    color: #000000;
+    font-weight: bold;
+    width: 100%;
+    white-space: nowrap;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hitokoto{
+    font-size: 1vw;
+    color: #00000070;
+    margin-top: 1%;
+}
+
+.my_play_lists{
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    margin-top: 5%;
+    text-align: center;
+}
+
+.creat_lists{
+    padding-right: 10%;
+}
+
+.list_cover{
+    width: 13vw;
+    height: 13vw;
+    border-radius: 10%;
+    box-shadow: 1vh 1vh 2vh #cdcdcd,
+    -0.9vh -0.9vh 2vh #ffffff;
+    background-size: 100% 100% !important;
+    transition: all 0.1s linear;
+}
+
+.list_cover:hover{
+    transform: scale(1.03);
+    transition: all 0.1s linear;
+}
+
+.list_name{
+    line-height: 7vh;
+    font-size: 1.5vw;
+    color: #00000070;
+}
+
+/* 移动端响应式设计 */
+@media screen and (max-width: 768px) {
+    .me {
+        width: 85vw;
+    }
+    
+    .me_info {
+        height: 25vw;
+    }
+    
+    .me_avatar {
+        width: 25vw;
+        height: 25vw;
+    }
+    
+    .me_greeting {
+        width: 55vw;
+        height: 25vw;
+        left: 28vw;
+    }
+    
+    .good {
+        font-size: 4vw;
+    }
+    
+    .user_id {
+        font-size: 5vw;
+    }
+    
+    .hitokoto {
+        font-size: 1.8vw;
+    }
+    
+    .list_cover {
+        width: 20vw;
+        height: 20vw;
+    }
+    
+    .list_name {
+        font-size: 2.5vw;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .me {
+        width: 90vw;
+    }
+    
+    .me_info {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .me_avatar {
+        width: 50vw;
+        height: 50vw;
+        position: relative;
+        margin-bottom: 20px;
+    }
+    
+    .me_greeting {
+        width: 90%;
+        height: auto;
+        position: relative;
+        left: 0;
+        text-align: center;
+    }
+    
+    .good {
+        font-size: 5vw;
+    }
+    
+    .user_id {
+        font-size: 6vw;
+    }
+    
+    .hitokoto {
+        font-size: 3.5vw;
+        margin-top: 10px;
+        display: block;
+    }
+    
+    .my_play_lists {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+    
+    .creat_lists {
+        padding-right: 0;
+    }
+    
+    .list_cover {
+        width: 50vw;
+        height: 50vw;
+    }
+    
+    .list_name {
+        font-size: 4vw;
+        line-height: 5vh;
+    }
+}
