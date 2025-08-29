@@ -31,7 +31,7 @@
 1. 克隆代码到本地
 
    ```sh
-   git clone https://github.com/timlzh/NeuMusic.git
+   git clone https://github.com/XiaoChuangll/NeuMusic.git
    ```
    
 2. 部署[Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)
@@ -50,7 +50,7 @@
 
 ## 贡献者
 
-@[Timlzh](https://github.com/timlzh/)
+@[XiaoChuangll](https://github.com/XiaoChuangll/)
 
 ## 鸣谢
 
