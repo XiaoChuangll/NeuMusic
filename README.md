@@ -46,7 +46,9 @@
    
    如果你是在本地部署的api，则api地址为`"http://localhost:3000/"`
    
-   可以填写我提供的试用地址``"http://musicapi.easierflying.com/"``
+   可以填写我提供的试用地址``"http://139.9.223.233:3000/"``
+  
+   网易云API接口状态站``https://status.beta-next.icu/status/ncm``
 
 ## 贡献者
 
